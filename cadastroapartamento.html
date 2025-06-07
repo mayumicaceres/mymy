@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário para Google Sheets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f4f1e8;
+        }
+        .logo {
+            font-size: 16px;
+            color: #333;
+            font-weight: normal;
+            position: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #success-message {
+            display: none;
+            color: green;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="logo">Myway Myhome</h1>
+    <h1>Sobre você</h1>
+    <form id="myForm">
+        <div class="form-group">
+            <label for="nome">Nome completo:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="cpf" id="cpf" name="cpf" required>
+        </div>
+        <div class="form-group">
+            <label for="rg">RG:</label>
+            <input type="rg" id="rg" name="rg" required>
+        </div>
+         <div class="form-group">
+            <label for="telefone">Telefone (Fixo):</label>
+            <input type="tel" id="telefone" name="telefone">
+        </div>
+
+        <div class="form-group">
+            <label for="telefonee">Telefone (Whatsapp):</label>
+            <input type="tel" id="telefonee" name="telefonee">
+        </div>
+       <h1>Sobre o apartamento</h1>
+       <div class="form-group">
+            <label for="nome">País:</label>
+            <input type="text" id="pais" name="pais" required>
+        </div>
+       <div class="form-group">
+            <label for="nome">Estado:</label>
+            <input type="text" id="estado" name="estado" required>
+        </div>
+        <div class="form-group">
+            <label for="nome">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" required>
+        </div>
+        <div class="form-group">
+            <label for="mensagem">Proximidade com:</label>
+            <textarea id="mensagem" name="proximidade" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="nome">Metragem (em metros quadrados):</label>
+            <input type="text" id="metragem" name="metragem" required>m²
+        </div>
+        <div class="form-group">
+            <label for="assunto">Padrão:</label>
+            <select id="padrao" name="padrao" required>
+                <option value="">Selecione...</option>
+                <option value="Médio">Médio</option>
+                <option value="Alto">Alto</option>
+                <option value="Super">Super</option>
+            </select>
+        </div>
+        <h1>O que contém no apartamento</h1>
+        <div class="form-group">
+            <label for="quarto">Quantos quartos?</label>
+            <input type="tel" id="quarto" name="quarto">
+        </div>
+        <div class="form-group">
+            <label for="suite">Quantas suítes?</label>
+            <input type="tel" id="suite" name="suite">
+        </div>
+        <div class="form-group">
+            <label for="sala">Quantas salas?</label>
+            <input type="tel" id="sala" name="sala">
+        </div>
+        <div class="form-group">
+            <label for="cozinha">Quantas cozinhas?</label>
+            <input type="tel" id="cozinha" name="cozinha">
+        </div>
+        <div class="form-group">
+            <label for="churrasqueira">Quantas churrasqueiras?</label>
+            <input type="tel" id="churrasqueira" name="churrasqueira">
+        </div>
+        <div class="form-group">
+            <label for="banheiro">Quantos banheiros?</label>
+            <input type="tel" id="banheiro" name="banheiro">
+        </div>
+        <div class="form-group">
+            <label for="lavabo">Quantos lavabos?</label>
+            <input type="tel" id="lavabo" name="lavabo">
+        </div>
+        <div class="form-group">
+            <label for="varanda">Quantas varandas?</label>
+            <input type="tel" id="varanda" name="varanda">
+        </div>
+        <div class="form-group">
+            <label for="mensagem">Extras:</label>
+            <textarea id="mensagem" name="extras" rows="5" required></textarea>
+        </div>
+        <div class="form-group">Assim que enviar estará concordando com os <a href="">termos e condições</a></div>
+        <button type="submit">Enviar</button>
+    </form>
+    <h2>Compartilhe para ter mais chances</h2>
+    <div id="success-message">
+        Dados enviados com sucesso!
+    </div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            // Captura os dados do formulário
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Envia para o Google Sheets (substitua com seu URL de script)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxz92sC3HuNg-AYX94wFryPnQUCnIIKc76wWSbvD2q7RpOM8QXK3bz_5WxHHmeUtzOl/exec';
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                document.getElementById("success-message").style.display = "block";
+                document.getElementById("myForm").reset();
+                setTimeout(() => {
+                    document.getElementById("success-message").style.display = "none";
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao enviar o formulário.');
+            });
+        });
+    </script>
+</body>
+</html>
